@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c37846x88qa8i"]
+
+[ext_resource type="PackedScene" uid="uid://d22rxwog35nqa" path="res://Scenes/Player.tscn" id="1_uidxn"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jywph"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1o4q3"]
+albedo_color = Color(0.117647, 0.227451, 0.415686, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sxt4n"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="World" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_uidxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0157012, 0, -0.0128558)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.867739, 0.497019, 0, -0.497019, 0.867739, -0.0889893, 2.86964, 4.69198)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.06793, 0, 0, 0, 7.06793, 0, 0, 0, 7.06793, 0, 0, 0)
+mesh = SubResource("PlaneMesh_jywph")
+surface_material_override/0 = SubResource("StandardMaterial3D_1o4q3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_sxt4n")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.964077, 0.265623, 0, -0.265623, 0.964077, 0, 7.49143, 4.97547)
